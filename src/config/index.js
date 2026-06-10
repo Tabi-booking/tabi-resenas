@@ -10,6 +10,10 @@ function readEnv(name) {
   return process.env[name]?.trim() || '';
 }
 
+function readSupabaseServiceRoleKey() {
+  return readEnv('SUPABASE_SERVICE_ROLE_KEY') || readEnv('SUPABASE_SERVICE_KEY');
+}
+
 function buildGoogleReviewUrl() {
   const placeId = readEnv('GOOGLE_PLACE_ID');
   if (placeId) {
@@ -26,7 +30,7 @@ function getConfigErrors() {
     errors.push('SUPABASE_URL');
   }
 
-  if (!readEnv('SUPABASE_SERVICE_ROLE_KEY')) {
+  if (!readSupabaseServiceRoleKey()) {
     errors.push('SUPABASE_SERVICE_ROLE_KEY');
   }
 
@@ -57,7 +61,7 @@ module.exports = {
   googlePlaceId: readEnv('GOOGLE_PLACE_ID'),
   googleReviewUrl: buildGoogleReviewUrl(),
   supabaseUrl: readEnv('SUPABASE_URL'),
-  supabaseServiceRoleKey: readEnv('SUPABASE_SERVICE_ROLE_KEY'),
+  supabaseServiceRoleKey: readSupabaseServiceRoleKey(),
   adminUser: readEnv('ADMIN_USER') || 'adminlarock',
   adminPassword: readEnv('ADMIN_PASSWORD') || 'LaRock2026.',
   sessionSecret: readEnv('SESSION_SECRET') || 'tabi-admin-dev-secret-change-me',
