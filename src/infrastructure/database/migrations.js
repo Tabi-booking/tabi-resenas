@@ -2,74 +2,32 @@
 
 const { getDatabase } = require('./connection');
 
-async function ensureColumn(db, table, column, definition) {
-  const result = await db.execute(`PRAGMA table_info(${table})`);
-  if (!result.rows.some((c) => c.name === column)) {
-    await db.execute(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
-  }
-}
+const TABLE_MISSING_HINT =
+  'Table "resenas" not found. Create it in the Supabase SQL Editor (see DEPLOY.md or supabase/schema.sql).';
 
-async function getColumnType(db, table, column) {
-  const result = await db.execute(`PRAGMA table_info(${table})`);
-  const match = result.rows.find((c) => c.name === column);
-  return match ? String(match.type).toUpperCase() : null;
-}
-
-async function migrateMeserosColumnToText(db) {
-  const type = await getColumnType(db, 'resenas', 'meseros');
-  if (!type || type === 'TEXT') return;
-
-  await db.batch(
-    [
-      'BEGIN',
-      `CREATE TABLE resenas_new (
-        id           INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre       TEXT    NOT NULL,
-        correo       TEXT    NOT NULL,
-        calificacion INTEGER NOT NULL CHECK(calificacion BETWEEN 1 AND 5),
-        comentario   TEXT    NOT NULL,
-        meseros      TEXT,
-        ocasion      TEXT,
-        fecha        TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
-      )`,
-      `INSERT INTO resenas_new (id, nombre, correo, calificacion, comentario, meseros, ocasion, fecha)
-      SELECT
-        id,
-        nombre,
-        correo,
-        calificacion,
-        comentario,
-        CASE WHEN meseros IS NULL THEN NULL ELSE CAST(meseros AS TEXT) END,
-        ocasion,
-        fecha
-      FROM resenas`,
-      'DROP TABLE resenas',
-      'ALTER TABLE resenas_new RENAME TO resenas',
-      'COMMIT',
-    ],
-    'write'
+function isMissingTableError(error) {
+  if (!error) return false;
+  const code = String(error.code || '');
+  const message = String(error.message || '').toLowerCase();
+  return (
+    code === '42P01' ||
+    code === 'PGRST205' ||
+    message.includes('does not exist') ||
+    message.includes('could not find the table')
   );
 }
 
 async function runMigrations() {
   const db = getDatabase();
+  const { error } = await db.from('resenas').select('id').limit(1);
 
-  await db.execute(`
-    CREATE TABLE IF NOT EXISTS resenas (
-      id           INTEGER PRIMARY KEY AUTOINCREMENT,
-      nombre       TEXT    NOT NULL,
-      correo       TEXT    NOT NULL,
-      calificacion INTEGER NOT NULL CHECK(calificacion BETWEEN 1 AND 5),
-      comentario   TEXT    NOT NULL,
-      meseros      TEXT,
-      ocasion      TEXT,
-      fecha        TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S', 'now', 'localtime'))
-    )
-  `);
+  if (error && isMissingTableError(error)) {
+    throw new Error(TABLE_MISSING_HINT);
+  }
 
-  await ensureColumn(db, 'resenas', 'meseros', 'TEXT');
-  await ensureColumn(db, 'resenas', 'ocasion', 'TEXT');
-  await migrateMeserosColumnToText(db);
+  if (error) {
+    throw error;
+  }
 }
 
 module.exports = { runMigrations };

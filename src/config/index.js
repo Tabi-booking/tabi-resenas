@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-
 const DEFAULT_GOOGLE_REVIEW_URL =
   'https://www.google.com/search?q=rooftop+la+rock#lrd=0x8e4429004e2f33f3:0xab95840a8dc78b93,1,,,,';
 
@@ -21,38 +19,19 @@ function buildGoogleReviewUrl() {
   return readEnv('GOOGLE_REVIEW_URL') || DEFAULT_GOOGLE_REVIEW_URL;
 }
 
-function resolveDatabaseUrl() {
-  const tursoUrl = readEnv('TURSO_DATABASE_URL');
-  const databaseUrl = readEnv('DATABASE_URL');
-  const localFile = `file:${path.join(__dirname, '../../resenas.db')}`;
-
-  if (isProduction) {
-    return tursoUrl || databaseUrl || '';
-  }
-
-  return tursoUrl || databaseUrl || localFile;
-}
-
-function isRemoteDatabaseUrl(url) {
-  return (
-    url.startsWith('libsql://') ||
-    url.startsWith('https://') ||
-    url.startsWith('http://')
-  );
-}
-
 function getConfigErrors() {
-  if (!isProduction) {
-    return [];
+  const errors = [];
+
+  if (!readEnv('SUPABASE_URL')) {
+    errors.push('SUPABASE_URL');
   }
 
-  const errors = [];
-  const databaseUrl = resolveDatabaseUrl();
+  if (!readEnv('SUPABASE_SERVICE_ROLE_KEY')) {
+    errors.push('SUPABASE_SERVICE_ROLE_KEY');
+  }
 
-  if (!databaseUrl) {
-    errors.push('TURSO_DATABASE_URL');
-  } else if (isRemoteDatabaseUrl(databaseUrl) && !readEnv('TURSO_AUTH_TOKEN')) {
-    errors.push('TURSO_AUTH_TOKEN');
+  if (!isProduction) {
+    return errors;
   }
 
   if (!readEnv('ADMIN_USER')) {
@@ -73,14 +52,12 @@ function getConfigErrors() {
   return errors;
 }
 
-const databaseUrl = resolveDatabaseUrl();
-
 module.exports = {
   port: Number(process.env.PORT) || 3000,
   googlePlaceId: readEnv('GOOGLE_PLACE_ID'),
   googleReviewUrl: buildGoogleReviewUrl(),
-  databaseUrl,
-  databaseAuthToken: readEnv('TURSO_AUTH_TOKEN') || undefined,
+  supabaseUrl: readEnv('SUPABASE_URL'),
+  supabaseServiceRoleKey: readEnv('SUPABASE_SERVICE_ROLE_KEY'),
   adminUser: readEnv('ADMIN_USER') || 'adminlarock',
   adminPassword: readEnv('ADMIN_PASSWORD') || 'LaRock2026.',
   sessionSecret: readEnv('SESSION_SECRET') || 'tabi-admin-dev-secret-change-me',

@@ -1,6 +1,6 @@
 'use strict';
 
-const { createClient } = require('@libsql/client');
+const { createClient } = require('@supabase/supabase-js');
 const config = require('../../config');
 
 let client;
@@ -14,9 +14,8 @@ function getDatabase() {
   }
 
   if (!client) {
-    client = createClient({
-      url: config.databaseUrl,
-      authToken: config.databaseAuthToken,
+    client = createClient(config.supabaseUrl, config.supabaseServiceRoleKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
     });
   }
   return client;
