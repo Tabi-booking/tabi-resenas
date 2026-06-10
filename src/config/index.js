@@ -57,14 +57,30 @@ function getConfigErrors() {
 }
 
 module.exports = {
-  port: Number(process.env.PORT) || 3000,
-  googlePlaceId: readEnv('GOOGLE_PLACE_ID'),
-  googleReviewUrl: buildGoogleReviewUrl(),
-  supabaseUrl: readEnv('SUPABASE_URL'),
-  supabaseServiceRoleKey: readSupabaseServiceRoleKey(),
-  adminUser: readEnv('ADMIN_USER') || 'adminlarock',
-  adminPassword: readEnv('ADMIN_PASSWORD') || 'LaRock2026.',
-  sessionSecret: readEnv('SESSION_SECRET') || 'tabi-admin-dev-secret-change-me',
+  get port() {
+    return Number(process.env.PORT) || 3000;
+  },
+  get googlePlaceId() {
+    return readEnv('GOOGLE_PLACE_ID');
+  },
+  get googleReviewUrl() {
+    return buildGoogleReviewUrl();
+  },
+  get supabaseUrl() {
+    return readEnv('SUPABASE_URL');
+  },
+  get supabaseServiceRoleKey() {
+    return readSupabaseServiceRoleKey();
+  },
+  get adminUser() {
+    return readEnv('ADMIN_USER') || 'adminlarock';
+  },
+  get adminPassword() {
+    return readEnv('ADMIN_PASSWORD') || 'LaRock2026.';
+  },
+  get sessionSecret() {
+    return readEnv('SESSION_SECRET') || 'tabi-admin-dev-secret-change-me';
+  },
   brand: {
     name: 'Tabi',
     tagline: 'Tu próxima mesa, a solo un clic.',
