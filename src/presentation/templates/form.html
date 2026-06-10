@@ -20,19 +20,17 @@
     <main class="site-main">
       <div class="review-card">
         <div id="form-view">
-          <div class="venue-hero" role="group" aria-labelledby="venue-label venue-name">
+          <div class="venue-hero" role="group" aria-label="{{venue}}">
             <div class="venue-hero__logo-wrap">
               <img
                 class="venue-hero__logo"
-                src="/assets/la-rock-logo.png"
+                src="/assets/la-rock-logo.png?v=4"
                 alt="La Rock Medellín Club House"
                 width="320"
                 height="120"
                 decoding="async"
               />
             </div>
-            <p class="venue-hero__label" id="venue-label">Estás reseñando</p>
-            <h1 class="venue-hero__name" id="venue-name">{{venue}}</h1>
           </div>
 
           <h2 class="review-card__title">Comparte tu experiencia</h2>
@@ -126,15 +124,13 @@
           <div class="success-venue-logo-wrap">
             <img
               class="success-venue-logo"
-              src="/assets/la-rock-logo.png"
+              src="/assets/la-rock-logo.png?v=4"
               alt="La Rock Medellín Club House"
               width="240"
               height="90"
               decoding="async"
             />
           </div>
-          <p class="success-venue-label">Reseña enviada para</p>
-          <div class="success-venue-name">{{venue}}</div>
           <div class="success-title">¡Gracias por tu reseña!</div>
           <p class="success-sub" id="success-sub">
             Apreciamos mucho que hayas compartido tu experiencia en <strong>{{venue}}</strong>.

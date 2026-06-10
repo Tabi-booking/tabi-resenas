@@ -139,45 +139,26 @@
   padding: 48px 44px;
 }
 
-/* ── Venue hero (nombre del restaurante) ─────────────────────────────── */
+/* ── Venue hero (logo del restaurante) ───────────────────────────────── */
 .venue-hero {
   text-align: center;
-  margin-bottom: 32px;
-  padding-bottom: 28px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .venue-hero__logo-wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .venue-hero__logo {
   display: block;
   width: 100%;
-  max-width: min(245px, 72vw);
+  max-width: min(275px, 74vw);
   height: auto;
   object-fit: contain;
   border-radius: var(--radius-sm);
-}
-
-.venue-hero__label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: var(--letter-wide);
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.venue-hero__name {
-  font-size: clamp(40px, 9vw, 56px);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.05;
-  color: var(--text-primary);
-  text-wrap: balance;
 }
 
 .review-card__title {
@@ -186,7 +167,9 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.2;
+  margin-top: 0;
   margin-bottom: 10px;
+  color: var(--accent);
 }
 
 .review-card__subtitle {
@@ -508,28 +491,10 @@
 .success-venue-logo {
   display: block;
   width: 100%;
-  max-width: min(180px, 58vw);
+  max-width: min(205px, 62vw);
   height: auto;
   object-fit: contain;
   border-radius: var(--radius-sm);
-}
-
-.success-venue-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: var(--letter-wide);
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-
-.success-venue-name {
-  font-size: clamp(32px, 7vw, 44px);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  margin-bottom: 16px;
-  text-wrap: balance;
 }
 
 .success-title {
@@ -587,24 +552,16 @@
   }
 
   .venue-hero {
-    margin-bottom: 24px;
-    padding-bottom: 22px;
-  }
-
-  .venue-hero__logo-wrap {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
   }
 
   .venue-hero__logo {
-    max-width: min(210px, 76vw);
+    max-width: min(235px, 76vw);
   }
 
   .success-venue-logo {
-    max-width: min(145px, 62vw);
-  }
-
-  .success-venue-name {
-    margin-bottom: 12px;
+    max-width: min(165px, 64vw);
   }
 
   .site-footer {
