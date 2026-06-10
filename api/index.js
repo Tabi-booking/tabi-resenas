@@ -1,3 +1,7 @@
 'use strict';
 
-module.exports = require('../src/createApp');
+require('express');
+
+const app = require('../src/createApp');
+
+module.exports = app;
