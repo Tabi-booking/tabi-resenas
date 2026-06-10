@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reseña {{venue}} · Tabi</title>
+  <link rel="stylesheet" href="/css/form.css"/>
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="site-header">
+      <a class="site-header__logo" href="{{landingContactUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Tabi — contacto">
+        <img src="/assets/tabi-imagotipo.png" alt="Tabi"/>
+      </a>
+      <span class="site-header__venue" aria-label="Restaurante {{venue}}">{{venue}}</span>
+    </header>
+
+    <main class="site-main">
+      <div class="review-card">
+        <div id="form-view">
+          <div class="venue-hero" role="group" aria-labelledby="venue-label venue-name">
+            <div class="venue-hero__logo-wrap">
+              <img
+                class="venue-hero__logo"
+                src="/assets/la-rock-logo.png"
+                alt="La Rock Medellín Club House"
+                width="320"
+                height="120"
+                decoding="async"
+              />
+            </div>
+            <p class="venue-hero__label" id="venue-label">Estás reseñando</p>
+            <h1 class="venue-hero__name" id="venue-name">{{venue}}</h1>
+          </div>
+
+          <h2 class="review-card__title">Comparte tu experiencia</h2>
+          <p class="review-card__subtitle">
+            Esta es la reseña de <strong class="review-card__venue">{{venue}}</strong>.
+            Tu opinión nos ayuda a seguir mejorando y a que más personas descubran lo mejor del restaurante.
+          </p>
+
+          <form id="review-form" novalidate>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" autocomplete="name"/>
+              <div class="field-error" id="err-nombre"></div>
+            </div>
+
+            <div class="field">
+              <label for="correo">Correo electrónico</label>
+              <input type="email" id="correo" name="correo" placeholder="hola@ejemplo.com" autocomplete="email"/>
+              <div class="field-error" id="err-correo"></div>
+            </div>
+
+            <div class="field">
+              <label for="meseros">Mesero que te atendió</label>
+              <input type="text" id="meseros" name="meseros" maxlength="100" placeholder="Ej. María, Carlos… (opcional)" autocomplete="off"/>
+              <div class="field-error" id="err-meseros"></div>
+            </div>
+
+            <div class="field field--select">
+              <label for="ocasion">Ocasión</label>
+              <div class="select-wrap">
+                <select id="ocasion" name="ocasion" required>
+                  <option value="">Selecciona un tipo de evento</option>
+                  <option value="cena_casual">Cena casual</option>
+                  <option value="brunch">Brunch</option>
+                  <option value="almuerzo">Almuerzo</option>
+                  <option value="networking">Networking</option>
+                  <option value="otros">Otros</option>
+                  <option value="festival_musical">Festival musical</option>
+                  <option value="cumpleanos">Cumpleaños</option>
+                </select>
+                <span class="select-wrap__chevron" aria-hidden="true">
+                  <svg viewBox="0 0 12 8" width="12" height="8" focusable="false">
+                    <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              <div class="field-error" id="err-ocasion"></div>
+            </div>
+
+            <div class="field">
+              <label>Calificación</label>
+              <div class="stars-row" id="stars-row" role="group" aria-label="Calificación de 1 a 5 estrellas">
+                <button type="button" class="star-btn" data-val="1" aria-label="1 estrella" title="1 estrella">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </button>
+                <button type="button" class="star-btn" data-val="2" aria-label="2 estrellas" title="2 estrellas">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </button>
+                <button type="button" class="star-btn" data-val="3" aria-label="3 estrellas" title="3 estrellas">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </button>
+                <button type="button" class="star-btn" data-val="4" aria-label="4 estrellas" title="4 estrellas">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </button>
+                <button type="button" class="star-btn" data-val="5" aria-label="5 estrellas" title="5 estrellas">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </button>
+              </div>
+              <div class="field-error" id="err-calificacion"></div>
+            </div>
+
+            <div class="field">
+              <label for="comentario">Describe tu experiencia</label>
+              <textarea id="comentario" name="comentario" placeholder="Cuéntanos cómo fue tu visita…"></textarea>
+              <div class="char-count"><span id="char-num">0</span>/500</div>
+              <div class="field-error" id="err-comentario"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-arrow" id="submit-btn">
+              <span id="btn-text">Continuar</span>
+            </button>
+          </form>
+        </div>
+
+        <div id="success">
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="success-venue-logo-wrap">
+            <img
+              class="success-venue-logo"
+              src="/assets/la-rock-logo.png"
+              alt="La Rock Medellín Club House"
+              width="240"
+              height="90"
+              decoding="async"
+            />
+          </div>
+          <p class="success-venue-label">Reseña enviada para</p>
+          <div class="success-venue-name">{{venue}}</div>
+          <div class="success-title">¡Gracias por tu reseña!</div>
+          <p class="success-sub" id="success-sub">
+            Apreciamos mucho que hayas compartido tu experiencia en <strong>{{venue}}</strong>.
+            Si lo deseas, también puedes dejar tu reseña en Google Reseñas de {{venue}}.
+          </p>
+          <div class="action-btns">
+            <button class="btn btn-ghost" id="copy-btn">Copiar comentario</button>
+            <div class="copy-feedback" id="copy-feedback">¡Comentario copiado!</div>
+            <a href="{{googleReviewUrl}}" id="google-link" target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary btn-arrow">Continuar</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__brand">
+        <a class="site-footer__logo" href="{{landingContactUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Tabi — contacto">
+          <img src="/assets/tabi-logotipo.png" alt="Tabi"/>
+        </a>
+        <span class="site-footer__copy">© 2025 Tabi · {{tagline}}</span>
+      </div>
+      <a class="site-footer__tagline" href="{{landingContactUrl}}" target="_blank" rel="noopener noreferrer">Powered by Tabi</a>
+    </footer>
+  </div>
+
+  <script>
+    window.TABI_REVIEW = {
+      googleReviewUrl: {{googleReviewUrlJson}},
+      selectedRating: 0,
+    };
+  </script>
+  <script src="/js/form.js"></script>
+</body>
+</html>

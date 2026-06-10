@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+.vercel
+
+# Local SQLite files
+resenas.db
+resenas.db-wal
+resenas.db-shm
+
+# macOS
+.DS_Store

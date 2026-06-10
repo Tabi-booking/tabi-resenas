@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin · Tabi Reviews</title>
+  <link rel="stylesheet" href="/css/admin.css"/>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a class="nav-brand__logo" href="{{landingContactUrl}}" target="_blank" rel="noopener noreferrer" aria-label="Tabi — contacto">
+        <img src="/assets/tabi-isotipo.png" alt="Tabi"/>
+      </a>
+      <span>Panel de reseñas</span>
+    </div>
+    <div class="nav-actions">
+      <a class="nav-link" href="/" target="_blank">Ver formulario →</a>
+      <button type="button" class="btn-logout" id="btn-logout">Cerrar sesión</button>
+    </div>
+  </nav>
+
+  <div class="admin-page">
+    <p class="page-title">Tabi · Admin</p>
+    <h1 class="page-heading">Reseñas recibidas</h1>
+
+    <div class="stats" id="stats">
+      <div class="stat-card">
+        <div class="stat-label">Total reseñas</div>
+        <div class="stat-value" id="s-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Promedio</div>
+        <div class="stat-value stat-value--accent" id="s-avg">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">5 estrellas</div>
+        <div class="stat-value" id="s-five">—</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <span class="table-title">Reseñas</span>
+        <span class="badge" id="count-badge">cargando…</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Cliente</th>
+              <th>Evento</th>
+              <th>Mesero</th>
+              <th>Calificación</th>
+              <th>Comentario</th>
+              <th>Fecha</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr class="loading-row"><td colspan="8"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
