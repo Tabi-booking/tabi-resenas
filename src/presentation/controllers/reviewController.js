@@ -16,13 +16,18 @@ function loadTemplate(name, vars = {}) {
 }
 
 async function createReview(req, res) {
-  const result = await reviewService.createReview(req.body);
+  try {
+    const result = await reviewService.createReview(req.body);
 
-  if (!result.ok) {
-    return res.status(400).json(result);
+    if (!result.ok) {
+      return res.status(400).json(result);
+    }
+
+    return res.json(result);
+  } catch (err) {
+    console.error('createReview controller error:', err);
+    return res.status(500).json({ ok: false, error: 'Error interno del servidor' });
   }
-
-  res.json(result);
 }
 
 async function listReviews(_req, res) {

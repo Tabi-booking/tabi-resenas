@@ -9,9 +9,14 @@ async function createReview(payload) {
     return { ok: false, errors };
   }
 
-  const data = normalizeReviewInput(payload);
-  const { id } = await reviewRepository.createReview(data);
-  return { ok: true, id };
+  try {
+    const data = normalizeReviewInput(payload);
+    const { id } = await reviewRepository.createReview(data);
+    return { ok: true, id };
+  } catch (err) {
+    console.error('createReview failed:', err);
+    return { ok: false, error: 'No se pudo guardar la reseña. Intenta de nuevo.' };
+  }
 }
 
 async function listReviews() {

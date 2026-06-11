@@ -79,11 +79,22 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = {};
+      }
 
       if (!res.ok || !data.ok) {
         if (data.errors) {
           Object.entries(data.errors).forEach(([f, m]) => showError(f, m));
+        } else {
+          showError(
+            'nombre',
+            data.error || 'No se pudo guardar la reseña. Intenta de nuevo.'
+          );
         }
         btnText.textContent = 'Continuar';
         btn.disabled = false;
@@ -92,7 +103,7 @@
 
       redirectToGoogleReviews();
     } catch {
-      showError('nombre', 'Error de red. Intenta de nuevo.');
+      showError('nombre', 'Error de red. Revisa tu conexión e intenta de nuevo.');
       btnText.textContent = 'Continuar';
       btn.disabled = false;
     }
