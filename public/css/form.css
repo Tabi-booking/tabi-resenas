@@ -201,17 +201,7 @@
   margin-bottom: 10px;
 }
 
-.field-hint {
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--text-subtle);
-  margin: -4px 0 14px;
-  line-height: 1.5;
-}
-
-.field input,
-.field textarea,
-.field select {
+.field input {
   width: 100%;
   background: transparent;
   border: none;
@@ -224,121 +214,17 @@
   transition: border-color var(--transition);
 }
 
-.field--select .select-wrap select {
-  border-bottom: none;
-}
-
-.field input::placeholder,
-.field textarea::placeholder {
+.field input::placeholder {
   color: var(--text-subtle);
   font-weight: 300;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus {
+.field input:focus {
   border-bottom-color: var(--border-focus);
 }
 
-.field input.error,
-.field textarea.error,
-.field select.error {
+.field input.error {
   border-bottom-color: var(--error);
-}
-
-/* ── Ocasión select (custom dropdown) ─────────────────────────────────── */
-.select-wrap {
-  position: relative;
-  border-bottom: 1px solid var(--border);
-  transition: border-color var(--transition);
-}
-
-@media (hover: hover) {
-  .select-wrap:hover {
-    border-bottom-color: rgba(252, 251, 242, 0.24);
-  }
-
-  .select-wrap:hover .select-wrap__chevron {
-    border-color: rgba(252, 251, 242, 0.18);
-    color: var(--text-muted);
-  }
-}
-
-.select-wrap:focus-within {
-  border-bottom-color: var(--border-focus);
-}
-
-.select-wrap:focus-within .select-wrap__chevron {
-  border-color: rgba(245, 94, 87, 0.45);
-  color: var(--accent);
-  background: rgba(245, 94, 87, 0.1);
-}
-
-.select-wrap:has(select.error) {
-  border-bottom-color: var(--error);
-}
-
-.select-wrap:has(select.error) .select-wrap__chevron {
-  border-color: rgba(255, 107, 107, 0.45);
-  color: var(--error);
-  background: rgba(255, 107, 107, 0.08);
-}
-
-.select-wrap select {
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 52px 12px 0;
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--text-primary);
-  background: transparent;
-  border: none;
-  outline: none;
-}
-
-.select-wrap select:invalid {
-  color: var(--text-subtle);
-  font-weight: 300;
-}
-
-.select-wrap select option {
-  color: var(--tabi-deep);
-  background: var(--tabi-cream);
-  font-weight: 400;
-}
-
-.select-wrap select option[value=''] {
-  color: var(--text-subtle);
-}
-
-.select-wrap__chevron {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: rgba(252, 251, 242, 0.04);
-  color: var(--text-subtle);
-  pointer-events: none;
-  transition:
-    border-color var(--transition),
-    background var(--transition),
-    color var(--transition);
-}
-
-.field textarea {
-  resize: vertical;
-  min-height: 90px;
-  line-height: 1.6;
 }
 
 .field-error {
@@ -351,54 +237,6 @@
 
 .field-error.show {
   display: block;
-}
-
-.char-count {
-  font-size: 11px;
-  color: var(--text-subtle);
-  text-align: right;
-  margin-top: 6px;
-  letter-spacing: 0.06em;
-}
-
-/* ── Stars ────────────────────────────────────────────────────────────── */
-.stars-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.star-btn {
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color var(--transition), background var(--transition), transform 0.1s;
-  color: var(--text-subtle);
-}
-
-.star-btn svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-.star-btn:hover,
-.star-btn.hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: scale(1.05);
-}
-
-.star-btn.active {
-  background: rgba(245, 94, 87, 0.12);
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* ── Buttons ──────────────────────────────────────────────────────────── */
@@ -437,18 +275,6 @@
   background: var(--accent-hover);
 }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  width: 100%;
-}
-
-.btn-ghost:hover {
-  border-color: var(--text-muted);
-  background: rgba(252, 251, 242, 0.04);
-}
-
 .btn-arrow::after {
   content: '→';
   font-size: 14px;
@@ -457,83 +283,6 @@
 
 .btn-arrow:hover::after {
   transform: translateX(4px);
-}
-
-/* ── Success view ─────────────────────────────────────────────────────── */
-#success {
-  display: none;
-  text-align: center;
-}
-
-.success-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: rgba(245, 94, 87, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-}
-
-.success-icon svg {
-  width: 28px;
-  height: 28px;
-}
-
-.success-venue-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.success-venue-logo {
-  display: block;
-  width: 100%;
-  max-width: min(205px, 62vw);
-  height: auto;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
-}
-
-.success-title {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.success-sub strong {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.success-sub {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--text-muted);
-  margin-bottom: 32px;
-  line-height: 1.6;
-}
-
-.action-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.copy-feedback {
-  font-size: 12px;
-  color: var(--success);
-  opacity: 0;
-  transition: opacity 0.3s;
-  letter-spacing: 0.04em;
-}
-
-.copy-feedback.show {
-  opacity: 1;
 }
 
 @media (max-width: 600px) {
@@ -558,10 +307,6 @@
 
   .venue-hero__logo {
     max-width: min(235px, 76vw);
-  }
-
-  .success-venue-logo {
-    max-width: min(165px, 64vw);
   }
 
   .site-footer {

@@ -24,19 +24,10 @@ Guía para desplegar el formulario de reseñas en [Vercel](https://vercel.com) c
 2. Ve a **SQL Editor** y ejecuta el contenido de `supabase/schema.sql`:
 
 ```sql
-CREATE TABLE IF NOT EXISTS public.resenas (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  nombre TEXT NOT NULL,
-  correo TEXT NOT NULL,
-  calificacion INTEGER NOT NULL CHECK (calificacion BETWEEN 1 AND 5),
-  comentario TEXT NOT NULL,
-  meseros TEXT,
-  ocasion JSONB,
-  fecha TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
-ALTER TABLE public.resenas ENABLE ROW LEVEL SECURITY;
+-- Ver supabase/schema.sql (incluye migración para columnas nullable)
 ```
+
+> Si ya tenías la tabla con `calificacion` y `comentario` NOT NULL, ejecuta también los `ALTER TABLE` del final de `supabase/schema.sql`.
 
 3. En **Project Settings → API**, copia:
    - **Project URL** → `SUPABASE_URL`
